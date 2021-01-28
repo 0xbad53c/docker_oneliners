@@ -5,5 +5,5 @@ Collection of docker oneliners to save time when compiling/running projects for 
 ## Maven
 Compile project in current directory from pom.xml and output to ./target/result.jar
 ```
-docker run -v $(pwd):/usr/src/app maven:3.5-jdk-8 mvn -f /usr/src/app/pom.xml clean package
+docker run -v ~/.m2:/root/.m2 -v $(pwd):/usr/src/app maven:3.5-jdk-8 mvn -f /usr/src/app/pom.xml clean package install
 ```
