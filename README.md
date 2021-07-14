@@ -9,9 +9,31 @@ docker run -v ~/.m2:/root/.m2 -v $(pwd):/usr/src/app maven:3.5-jdk-8 mvn -f /usr
 ```
 
 
-# Scanning repos for secrets
+# Automatic scanning for secrets/SAST/...
 ## offline scanning all projects in current directory
 ### GitLeaks
 ```
 find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && docker run --rm -v "$(pwd)":/my-repo zricethezav/gitleaks:latest --path="/my-repo"' \;
+```
+
+Output will be printed or pass with --report=
+
+
+### ShiftLeft Sast-scan
+```
+find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && docker run --rm -e "WORKSPACE=$(pwd)" -v "$(pwd)":/app shiftleft/sast-scan scan --build' \;
+```
+
+output will be in /app/reports
+
+### Trufflehog
+```
+find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && docker run --rm -v "$(pwd):/proj" dxa4481/trufflehog file:///proj' \; >> trufflehog.txt
+```
+
+output will be currentdir/trufflehog.txt
+
+### semgrep
+```
+find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && docker run --rm -v "$(pwd):/src" returntocorp/semgrep --config=p/security-audit /src' \;
 ```
