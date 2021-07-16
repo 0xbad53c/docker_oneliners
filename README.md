@@ -42,4 +42,5 @@ find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && docker run 
 #### Scan all package.json files in subdirectories
 ```
 find . -name package.json -exec bash -c 'cd "$(dirname {})" && echo "testing {}" && docker run --rm -v "$(pwd):/src" confused -l npm /src/package.json' \;
+find . -name pom.xml -exec bash -c 'cd "$(dirname {})" && echo "testing {}" && docker run --rm -v "$(pwd):/src" confused -l mvn /src/pom.xml' \;
 ```
