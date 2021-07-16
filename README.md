@@ -1,5 +1,5 @@
 # docker_oneliners
-Collection of docker oneliners to save time when compiling/running projects for security research &amp; development.
+Collection of docker oneliners to save time when compiling/running projects for security research &amp; development. Credits for the projects go to the original owners. This repository just aims to ease usage for myself.
 
 # Compiling Java
 ## Maven
