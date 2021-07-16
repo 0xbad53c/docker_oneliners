@@ -37,3 +37,9 @@ output will be currentdir/trufflehog.txt
 ```
 find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && docker run --rm -v "$(pwd):/src" returntocorp/semgrep --config=p/security-audit /src' \;
 ```
+
+### Dependency Confusion scanning with Confused (build docker container first)
+#### Scan all package.json files in subdirectories
+```
+find . -name package.json -exec bash -c 'cd "$(dirname {})" && echo "testing {}" && docker run --rm -v "$(pwd):/src" confused -l npm /src/package.json' \;
+```
