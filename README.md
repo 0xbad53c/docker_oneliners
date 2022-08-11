@@ -49,5 +49,6 @@ find . -name pom.xml -exec bash -c 'cd "$(dirname {})" && echo "testing {}" && d
 
 ## SSL/TLS testing
 ```
-docker run --rm -ti drwetter/testssl.sh https://url
+docker run --rm -ti drwetter/testssl.sh https://www.example.com
+docker run --rm -it nablac0d3/sslyze www.example.com
 ```
