@@ -39,6 +39,8 @@ find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && docker run 
 ```
 
 ### Dependency Confusion scanning with Confused (build docker container first)
+Repo with Dockerfile: https://github.com/0xbad53c/confused
+
 #### Scan all package.json files in subdirectories
 ```
 find . -name package.json -exec bash -c 'cd "$(dirname {})" && echo "testing {}" && docker run --rm -v "$(pwd):/src" confused -l npm /src/package.json' \;
