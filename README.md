@@ -34,7 +34,7 @@ This is a free open-source security tool which can detect various kinds of secur
 docker run --rm -e "WORKSPACE=$(pwd)" -v "$(pwd)":/app shiftleft/sast-scan scan --build
 ```
 
-## Scan multiple project directories at once
+### Scan multiple project directories at once
 Drop the projects all in the same folder and run the oneliner from the folder.
 ```
 find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c 'cd "{}" && docker run --rm -e "WORKSPACE=$(pwd)" -v "$(pwd)":/app shiftleft/sast-scan scan --build' \;
@@ -98,8 +98,43 @@ docker run --rm -it --env SNYK_TOKEN=<YOUR API KEY> -v "$(pwd)":/app -v "$(pwd)/
 snyk-to-html -i snyk-test-output.json -o snyk-result.html -t ~/snyk-to-html-template/template/test-report.hbs
 ```
 
-## SSL/TLS testing
+# Web Scanners
+## Nikto
+https://github.com/sullo/nikto
+Nikto is a Web Server scanner.
+```
+docker run --rm -v $(pwd):/tmp sullo/nikto:2.1.6 -h http://www.example.com -o /tmp/out.json
+```
+
+## Nuclei
+https://github.com/projectdiscovery/nuclei
+Nuclei offers scanning for a variety of protocols, including TCP, DNS, HTTP, SSL, File, Whois, Websocket, Headless etc. With powerful and flexible templating, Nuclei can be used to model all kinds of security checks and comes with a variety of community-made templates.
+```
+docker run --rm -it projectdiscovery/nuclei -u https://example.com
+```
+
+## WhatWeb
+Original repo: https://github.com/urbanadventurer/WhatWeb
+Repo with Dockerfile: https://github.com/0xbad53c/WhatWeb
+Web scanner with various plugins for additional/custom checks.
+```
+docker run --rm -it whatweb https://example.com
+```
+
+# SSL/TLS testing
 ```
 docker run --rm -ti drwetter/testssl.sh https://www.example.com
 docker run --rm -it nablac0d3/sslyze www.example.com
 ```
+
+# DNS testing
+## DNSRecon
+https://github.com/darkoperator/dnsrecon
+Tool to check your DNS servers for Zone Transfer issues, secret leaks and other misconfigurations. The repo comes with a Dockerfile.
+
+```
+docker run --rm -it dnsrecon -d example.com
+```
+
+
+
