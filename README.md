@@ -149,4 +149,13 @@ docker run --rm -it dnsrecon -d example.com
 ```
 
 
-
+# Other
+## Inotifytools
+Not a Docker oneliner, but might come in handy to monitor directories/volumes for file changes, e.g. when testing file uploads or other functionality. The following oneliner monitors the webroot for file creations:
+```
+inotifywait -m /var/www/html -e create -e moved_to |
+    while read dir action file; do
+        echo "The file '$file' appeared in directory '$dir' via '$action'"
+        # do something with the file
+    done
+```
